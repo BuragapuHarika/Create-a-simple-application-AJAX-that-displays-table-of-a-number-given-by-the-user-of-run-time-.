@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table with AJAX</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input { padding: 8px; margin: 10px; }
+        button { padding: 8px 12px; cursor: pointer; }
+        table { margin: 20px auto; border-collapse: collapse; }
+        table, th, td { border: 1px solid black; padding: 8px; }
+    </style>
+</head>
+<body>
+    <h2>Enter a Number to Get its Multiplication Table</h2>
+    <input type="number" id="num" placeholder="Enter a number">
+    <button onclick="getTable()">Generate Table</button>
+    
+    <h3>Multiplication Table:</h3>
+    <div id="result"></div>
+
+    <script>
+        function getTable() {
+            let num = document.getElementById("num").value;
+            if (num === "") {
+                alert("Please enter a number");
+                return;
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "table.php?num=" + num, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; color: red;background-color: lightblue; }
+    input { padding: 8px; margin: 10px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    table { margin: 20px auto; border-collapse: collapse; }
+    table, th, td { border: 1px solid black; padding: 8px; }
+
+</style>
+
